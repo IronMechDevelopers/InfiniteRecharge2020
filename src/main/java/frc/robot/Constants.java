@@ -28,11 +28,18 @@ public final class Constants {
         public static final boolean kLeftEncoderReversed = false;
         public static final boolean kRightEncoderReversed = true;
     
-        public static final int kEncoderCPR = 1024;
+        public static final int kEncoderCPR = 4096;
         public static final double kWheelDiameterInches = 7.5;
         public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+      }
+
+      public static final class AutoConstants {
+        public static final double INCH = 1;
+        public static final double FEET = 12;
+        public static final double YARD = FEET*3;
+        public static final double SECON = 1;
       }
 
 }
