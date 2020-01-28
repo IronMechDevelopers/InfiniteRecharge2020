@@ -12,11 +12,11 @@ package frc.robot.subsystems;
  */
 public class Shooter {
     //feeds balls into shooter
-    public feedToShooter() {
+    public void feedToShooter() {
 
     }
     //shoots the balls
-    public shoot() {
+    public void shoot() {
 
     }
 }

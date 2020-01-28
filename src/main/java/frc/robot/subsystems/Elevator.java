@@ -12,19 +12,19 @@ package frc.robot.subsystems;
  */
 public class Elevator {
     //extends the elevator up to latch onto bar
-    public extend() {
-
+    public void extend() {
+        
     }
     //destends the elevator down to latch onto bar
-    public destend() {
+    public void destend() {
 
     }
     //moves the robot left along the bar, for balance
-    public moveLeft() {
+    public void moveLeft() {
 
     }
     //moves the elevator right along the bar, for balance
-    public moveRight() {
+    public void moveRight() {
 
     }
 }

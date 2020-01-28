@@ -7,10 +7,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -22,23 +19,26 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants;
 
+
+
 public class Drivetrain extends SubsystemBase {
 
+
   // parent motors
-  private TalonSRX leftFather = new TalonSRX(4);
-  private TalonSRX rightFather = new TalonSRX(3);
+  private TalonSRX leftFather = new TalonSRX(DriveConstants.LEFTFATHER);
+  private TalonSRX rightFather = new TalonSRX(DriveConstants.RIGHTFATHER);
  
   // son motors
-  private VictorSPX leftSon = new VictorSPX(2);
-  private VictorSPX rightSon = new VictorSPX(1);
+  private VictorSPX leftSon = new VictorSPX(DriveConstants.LEFTSON);
+  private VictorSPX rightSon = new VictorSPX(DriveConstants.RIGHTSON);
 
   //IMU
   private ADIS16448_IMU imu = new ADIS16448_IMU ();
 
   private NeutralMode brakeMode = NeutralMode.Coast;
 
-  private int leftRest=0;
-  private int rightRest=0;
+  private int leftOffset=0;
+  private int rightOffset=0;
 
 
 
@@ -96,16 +96,17 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("rightVelocity",rightFather.getSelectedSensorVelocity());
     SmartDashboard.putNumber("leftVelocity",leftFather.getSelectedSensorVelocity());
 
-    SmartDashboard.putNumber("rightPosition",rightFather.getSelectedSensorPosition());
-    SmartDashboard.putNumber("leftPosition",leftFather.getSelectedSensorPosition());
-
-    SmartDashboard.putNumber("leftDisntance" , getDistance("left"));
-    SmartDashboard.putNumber("rightDisntance" , getDistance("right"));
+    SmartDashboard.putNumber("rightPosition",getRightDistance());
+    SmartDashboard.putNumber("leftPosition" ,getLeftDistance());
 
     SmartDashboard.putNumber("Out % left", leftFather.getMotorOutputPercent());
     SmartDashboard.putNumber("Out % right", rightFather.getMotorOutputPercent());
 
     SmartDashboard.putNumber("testing", rightFather.getMotorOutputPercent());
+
+    SmartDashboard.putNumber("INCHESPERPULSE", DriveConstants.INCHESPERPULSE);
+    SmartDashboard.putNumber("kEncoderDistancePerPulse", DriveConstants.kEncoderDistancePerPulse);
+    SmartDashboard.putNumber("magicNumber", DriveConstants.magicNumber);
 
   }
 
@@ -121,27 +122,24 @@ public Object arcadeDrive(double fwd, double rot) {
    */
   public void reset() {
     imu.reset();
+    leftOffset = leftFather.getSelectedSensorPosition();
+    rightOffset = rightFather.getSelectedSensorPosition();
   }
+  public int getLeftDistance() {
+    return leftFather.getSelectedSensorPosition() - leftOffset;
+  }
+  public int getRightDistance() {
+    return rightFather.getSelectedSensorPosition() - rightOffset;
 
+  }
     /**
    * Get the average distance of the encoders since the last reset.
    *
    * @return The distance driven (average of left and right encoders).
    */
   public double getDistance() {
-    return (getDistance("left")+getDistance("right"))/(2.0);
+    return (getLeftDistance()+getRightDistance())/(2.0);
   }
 
-  public double getDistance(String leftRight)
-  {
-    if(leftRight.equalsIgnoreCase("left"))
-    {
-      return leftFather.getSelectedSensorPosition()*DriveConstants.INCHESPERPULSE;
-    }
-    if(leftRight.equalsIgnoreCase("right"))
-    {
-      return rightFather.getSelectedSensorPosition()*DriveConstants.INCHESPERPULSE;
-    }
-    return 0.0;
-  }
+
 }

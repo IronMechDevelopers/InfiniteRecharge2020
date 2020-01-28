@@ -12,19 +12,19 @@ package frc.robot.subsystems;
  */
 public class Flopper {
     //propels flopper out for use
-    public flopperOut() {
+    public void flopperOut() {
 
     }
     //retracts flopper once not in use
-    public flopperIn() {
+    public void flopperIn() {
 
     }
     //activates flopper to suck in balls within flopper range
-    public suckIn() {
+    public void suckIn() {
 
     }
     //dispenses balls by running flopper track in reverse, possibly needs to be relocated to shooter subsystem
-    public dispense() {
+    public void dispense() {
 
     }
 }
