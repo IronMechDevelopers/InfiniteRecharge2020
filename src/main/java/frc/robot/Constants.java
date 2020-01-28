@@ -37,11 +37,14 @@ public final class Constants {
         public static double kMaxRPM = 5330;
         public static double kSensorUnitsPerRotation = kEncoderCPR;
         public static double kGearRatio=10.71;
-        
+
         public static double magicNumber =  (kMaxRPM  / 600) * (kSensorUnitsPerRotation / kGearRatio);
       }
 
+ public static final class ShooterConstants {
 
+  public static final int shooterMotor =0;
+ }
 
       public static final class AutoConstants {
         public static final double INCH = 1;

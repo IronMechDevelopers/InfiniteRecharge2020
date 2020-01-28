@@ -7,16 +7,45 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.ShooterConstants;
+
 /**
  * Add your docs here.
  */
-public class Shooter {
+public class Shooter extends SubsystemBase {
+
+    private Victor shooter = new Victor(ShooterConstants.shooterMotor);
+    private double motorPercentage;
     //feeds balls into shooter
     public void feedToShooter() {
-
+        motorPercentage=0.0;
     }
-    //shoots the balls
-    public void shoot() {
 
+    public void increaseSpeed(double increaseSpeed)
+    {
+        motorPercentage+=Math.abs(increaseSpeed);
+    }
+    public void decreaseSpeed(double decreaseSpeed)
+    {
+        motorPercentage-=Math.abs(decreaseSpeed);
+    }
+
+    //shoots the balls
+    public void shoot(double _motorPercentage) {
+        this.motorPercentage=_motorPercentage;
+        shooter.set(motorPercentage);
+    }
+
+    @Override
+    public void periodic() {
+      // This method will be called once per scheduler run
+        log();
+    }
+
+    public void log() {
+        SmartDashboard.putNumber("Shooting Speed", motorPercentage);
     }
 }
