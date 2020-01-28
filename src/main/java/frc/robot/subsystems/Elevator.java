@@ -7,18 +7,24 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+/**
+ * Add your docs here.
+ */
+public class Elevator {
+    //extends the elevator up to latch onto bar
+    public extend() {
 
-public class ExampleSubsystem extends SubsystemBase {
-  /**
-   * Creates a new ExampleSubsystem.
-   */
-  public ExampleSubsystem() {
+    }
+    //destends the elevator down to latch onto bar
+    public destend() {
 
-  }
+    }
+    //moves the robot left along the bar, for balance
+    public moveLeft() {
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    }
+    //moves the elevator right along the bar, for balance
+    public moveRight() {
+
+    }
 }

@@ -19,8 +19,8 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
     private final Drivetrain m_robotDrive = new Drivetrain();
     
-    private final Joystick dirverLeftStick = new Joystick(1);
-    private final Joystick dirverRightStick = new Joystick(2);
+    private final Joystick driverLeftStick = new Joystick(1);
+    private final Joystick driveRightStick = new Joystick(2);
 
     public RobotContainer() {
 
@@ -31,9 +31,8 @@ public class RobotContainer {
             // A split-stick arcade command, with forward/backward controlled by the left
             // hand, and turning controlled by the right.
             new RunCommand(() -> m_robotDrive
-                .arcadeDrive(dirverLeftStick.getY(),
-                dirverRightStick.getX()), m_robotDrive));
-    
+                .arcadeDrive(driverLeftStick.getY(),
+                driveRightStick.getX()), m_robotDrive));
       }
 
 	public Command getAutonomousCommand() {
