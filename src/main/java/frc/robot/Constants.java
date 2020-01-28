@@ -30,10 +30,21 @@ public final class Constants {
     
         public static final int kEncoderCPR = 4096;
         public static final double kWheelDiameterInches = 7.5;
+
+        public static final double INCHESPERPULSE = (1.0)/((kEncoderCPR/1.0) * (1.0/kWheelDiameterInches));
         public static final double kEncoderDistancePerPulse =
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
+
+            double kMaxRPM = 5330;
+            double kSensorUnitsPerRotation = kEncoderCPR;
+            double kGearRatio=10.71;
+      
+      
+            double magicNumber =  (kMaxRPM  / 600) * (kSensorUnitsPerRotation / kGearRatio);
       }
+
+
 
       public static final class AutoConstants {
         public static final double INCH = 1;
@@ -41,5 +52,7 @@ public final class Constants {
         public static final double YARD = FEET*3;
         public static final double SECON = 1;
       }
+
+      
 
 }
