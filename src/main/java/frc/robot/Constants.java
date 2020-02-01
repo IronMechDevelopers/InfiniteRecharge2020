@@ -45,14 +45,21 @@ public final class Constants {
 
   public static final int shooterMotor =0;
  }
+ 
+ public static final class FlopperConstants{
+   
+  public static final int flopperMotor = 0;
+ }
+
+ public static final class CollecterConstants{
+
+  public static final int collecterMotor = 0;
+ }
 
       public static final class AutoConstants {
         public static final double INCH = 1;
         public static final double FEET = 12;
         public static final double YARD = FEET*3;
         public static final double SECON = 1;
-      }
-
-      
-
+      }     
 }

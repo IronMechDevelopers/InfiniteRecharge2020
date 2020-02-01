@@ -125,10 +125,10 @@ public Object arcadeDrive(double fwd, double rot) {
     leftOffset = leftFather.getSelectedSensorPosition();
     rightOffset = rightFather.getSelectedSensorPosition();
   }
-  public int getLeftDistance() {
+  public int getLeftTicks() {
     return leftFather.getSelectedSensorPosition() - leftOffset;
   }
-  public int getRightDistance() {
+  public int getRightTicks() {
     return rightFather.getSelectedSensorPosition() - rightOffset;
 
   }
@@ -137,9 +137,17 @@ public Object arcadeDrive(double fwd, double rot) {
    *
    * @return The distance driven (average of left and right encoders).
    */
-  public double getDistance() {
+  public double getAverageTicks() {
+    return (getLeftTicks()+getRightTicks())/(2.0);
+  }
+  public double getRightDistance(){
+    return getRightTicks()*0.006023622;//returns distance in inches
+  }
+  public double getLeftDistance(){
+    return getLeftTicks()*0.006023622;//returns distance in inches
+  }
+  public double getAverageDistance() {
     return (getLeftDistance()+getRightDistance())/(2.0);
   }
-
 
 }

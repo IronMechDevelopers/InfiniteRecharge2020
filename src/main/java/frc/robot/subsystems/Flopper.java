@@ -6,25 +6,35 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.Victor;
+import frc.robot.Constants.FlopperConstants;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 
 /**
  * Add your docs here.
  */
-public class Flopper {
-    //propels flopper out for use
-    public void flopperOut() {
-
-    }
-    //retracts flopper once not in use
-    public void flopperIn() {
-
-    }
-    //activates flopper to suck in balls within flopper range
-    public void suckIn() {
-
-    }
-    //dispenses balls by running flopper track in reverse, possibly needs to be relocated to shooter subsystem
-    public void dispense() {
-
+public class Flopper extends SubsystemBase {
+    //flops the flopper and unflops the flopper
+    private boolean isIn=true;
+    private double motorPercentage;
+    private Victor flopper = new Victor(FlopperConstants.flopperMotor);
+    
+    public void move(double _motorPercentage){
+    //inverts position of flopper
+    //will be bound to a button as a toggle flopper out/flopper in
+        if (isIn){
+             isIn=false;
+             //TODO adk mr Rad1 how to make motors go in reverse .
+             this.motorPercentage=_motorPercentage*-1;
+             flopper.set(motorPercentage);
+        }else{
+            isIn=true;
+            //TODO ask mr Rad1 how to make motors go .
+            this.motorPercentage=_motorPercentage;
+            flopper.set(motorPercentage);
+        }
     }
 }
+
