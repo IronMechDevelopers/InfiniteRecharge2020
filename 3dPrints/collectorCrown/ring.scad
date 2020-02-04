@@ -33,7 +33,7 @@ module halved(){
     
 
 module drillHole(){
-translate([0,0,-innerRadius-bumpHeight])union(){ 
+translate([0,0,-innerRadius-bumpHeight-1])union(){ 
     cylinder(h=10, d=9,center=true) ;
     cylinder(h=10, d=5,center=false) ;
         }}
