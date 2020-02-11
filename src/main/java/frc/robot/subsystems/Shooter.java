@@ -46,6 +46,6 @@ public class Shooter extends SubsystemBase {
     }
 
     public void log() {
-        SmartDashboard.putNumber("Shooting Speed", motorPercentage);
+        SmartDashboard.putNumber("Shooting Speed", ShooterConstants.shooterSpeed);
     }
 }

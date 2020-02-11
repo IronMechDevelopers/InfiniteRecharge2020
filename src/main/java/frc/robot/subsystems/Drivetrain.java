@@ -23,6 +23,13 @@ import frc.robot.Constants.DriveConstants;
 
 public class Drivetrain extends SubsystemBase {
 
+//ticks per inche
+private double ticksPerRev=1024;
+private double wheelDiameterInches=7.87402;
+private double wheelCircumfranceInches=wheelDiameterInches*Math.PI;
+private double ticksPerInch=ticksPerRev/wheelCircumfranceInches;
+
+
 
   // parent motors
   private TalonSRX leftFather = new TalonSRX(DriveConstants.LEFTFATHER);
@@ -39,7 +46,6 @@ public class Drivetrain extends SubsystemBase {
 
   private int leftOffset=0;
   private int rightOffset=0;
-
 
 
   /**
@@ -79,7 +85,12 @@ public class Drivetrain extends SubsystemBase {
   }
 
 
-
+  public void testDrive(){
+    //a test drive function to see if we have the correct code in commands
+    ControlMode controlMode=ControlMode.PercentOutput;
+    leftFather.set(controlMode,0.1);
+    rightFather.set(controlMode,0.1);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -141,10 +152,10 @@ public Object arcadeDrive(double fwd, double rot) {
     return (getLeftTicks()+getRightTicks())/(2.0);
   }
   public double getRightDistance(){
-    return getRightTicks()*0.006023622;//returns distance in inches
+    return getRightTicks()/ticksPerInch;//returns distance in inches
   }
   public double getLeftDistance(){
-    return getLeftTicks()*0.006023622;//returns distance in inches
+    return getLeftTicks()/ticksPerInch;//returns distance in inches
   }
   public double getAverageDistance() {
     return (getLeftDistance()+getRightDistance())/(2.0);

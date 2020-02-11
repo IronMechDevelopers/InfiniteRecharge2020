@@ -5,26 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands;
 
 /**
  * Add your docs here.
  */
-public class Elevator {
-    //extends the elevator up to latch onto bar
-    public void extend() {
-        
-    }
-    //destends the elevator down to latch onto bar
-    public void destend() {
-
-    }
-    //moves the robot left along the bar, for balance
-    public void moveLeft() {
-
-    }
-    //moves the elevator right along the bar, for balance
-    public void moveRight() {
-
-    }
+public class SimpleDrive {
 }

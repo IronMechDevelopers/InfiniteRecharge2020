@@ -6,34 +6,20 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import edu.wpi.first.wpilibj.Victor;
-import frc.robot.Constants.FlopperConstants;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-
-/**
- * Add your docs here.
- */
-public class Flopper extends SubsystemBase {
+public class Flopper extends UnifiedMotorController {
     //flops the flopper and unflops the flopper
     private boolean isIn=true;
-    private double motorPercentage;
-    private Victor flopper = new Victor(FlopperConstants.flopperMotor);
     
-    public void move(double _motorPercentage){
+    public void deploy(double _motorPercentage){
     //inverts position of flopper
     //will be bound to a button as a toggle flopper out/flopper in
         if (isIn){
              isIn=false;
-             //TODO adk mr Rad1 how to make motors go in reverse .
-             this.motorPercentage=_motorPercentage*-1;
-             flopper.set(motorPercentage);
+             runBackwards(_motorPercentage);
         }else{
             isIn=true;
-            //TODO ask mr Rad1 how to make motors go .
-            this.motorPercentage=_motorPercentage;
-            flopper.set(motorPercentage);
+             runForward(_motorPercentage);
         }
     }
 }
