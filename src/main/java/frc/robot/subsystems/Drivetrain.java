@@ -42,7 +42,7 @@ private double ticksPerInch=ticksPerRev/wheelCircumfranceInches;
   //IMU
   private ADIS16448_IMU imu = new ADIS16448_IMU ();
 
-  private NeutralMode brakeMode = NeutralMode.Coast;
+  private NeutralMode brakeMode = NeutralMode.Brake;
 
   private int leftOffset=0;
   private int rightOffset=0;

@@ -8,42 +8,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.DriveConstants.ShooterConstants;
-import frc.robot.subsystems.Shooter;
+import frc.robot.Constants.DriveConstants.ElevatorConstants;
+import frc.robot.subsystems.Elevator;
 
-public class Shoot extends CommandBase {
-
-  private Shooter shooter;
-  /**
-   * Creates a new Shoot.
-   */
-  public Shoot(Shooter _shooter) {
+public class ElevatorDown extends CommandBase {
+  private Elevator elevator;
+  private long time;
+  public ElevatorDown(Elevator elevator) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.shooter=_shooter;
-    addRequirements(shooter);
+      this.elevator=elevator;
+      addRequirements(this.elevator);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ShooterConstants.shooterSpeed+=.01;
+    time = System.currentTimeMillis();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shoot(ShooterConstants.shooterSpeed);
+    this.elevator.runBackwards(ElevatorConstants.elevatorSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.shoot(0);
+    this.elevator.stopMotor();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(System.currentTimeMillis()>=time+ElevatorConstants.runTime)
+    return true;
+    else
     return false;
   }
 }

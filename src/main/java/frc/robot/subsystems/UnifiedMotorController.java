@@ -21,17 +21,14 @@ public class UnifiedMotorController extends SubsystemBase {
     }
     //runs the motor in a "forwards" direction
     public void runForward(double _motorPercentage) {
-        motorPercentage = 0.0;
         this.motorPercentage=_motorPercentage;
         motor.set(motorPercentage);
         
     }
     //runs the motor in a "backwards" direction
     public void runBackwards(double _motorPercentage) {
-        motorPercentage = 0.0;
         this.motorPercentage=_motorPercentage * -1;
         motor.set(motorPercentage);
-
     }
 
     public void stopMotor()

@@ -7,27 +7,22 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Victor;
 import frc.robot.Constants.DriveConstants.FlopperConstants;
 
-public class Flopper extends UnifiedMotorController {
-    //flops the flopper and unflops the flopper
-    private boolean isIn=true;
+/**
+ * Add your docs here.
+ */
+public class Collector extends UnifiedMotorController {
 
-    public Flopper() {
-        super();        
-        setConstant(FlopperConstants.flopperMotor);
+    private Victor collectMotor = new Victor(FlopperConstants.collectMotor);
+
+	public void collect() {
+        collectMotor.set(.75);
+	}
+
+	public void stopCollect() {
+        collectMotor.set(0);
     }
     
-    public void deploy(double _motorPercentage) {
-    //inverts position of flopper
-    //will be bound to a button as a toggle flopper out/flopper in
-        if (isIn){
-             isIn=false;
-             runBackwards(_motorPercentage);
-        }else{
-            isIn=true;
-             runForward(_motorPercentage);
-        }
-    }
 }
-

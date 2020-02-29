@@ -18,10 +18,10 @@ package frc.robot;
 public final class Constants {
 
     public static final class DriveConstants {
-        public static final int RIGHTSON = 0;
-        public static final int LEFTSON = 1;
-        public static final int RIGHTFATHER = 2;
-        public static final int LEFTFATHER = 3;
+        public static final int RIGHTSON = 1;
+        public static final int LEFTSON = 2;
+        public static final int RIGHTFATHER = 3;
+        public static final int LEFTFATHER = 4;
     
         public static final boolean kLeftEncoderReversed = false;
         public static final boolean kRightEncoderReversed = true;
@@ -39,39 +39,64 @@ public final class Constants {
         public static double kGearRatio=10.71;
 
         public static double magicNumber =  (kMaxRPM  / 600) * (kSensorUnitsPerRotation / kGearRatio);
+
+        public static double linearize(double x1, double y1, double x2, double y2, double input){
+          Double m = (y2-y1)/(x2-x1);
+          Double b = y1-(-m * x1);
+          return m*input+b;
       }
 
  public static final class ShooterConstants {
 
-  public static final int shooterMotor =0;
-  public static double shooterSpeed=0;
+  public static final int shooterMotor =4;
+  public static double shooterSpeed=.25;
   
  }
  
  public static final class FlopperConstants{
    
-  public static final int flopperMotor = 0;
+  public static final int flopperMotor = 7;
+  public static final int collectMotor = 5;
+  public static final int runTime =5000;
  }
- 
+ public static final class ElevatorPullerConstants{
+   public static final int ElevatorPullerMotor = 8;
+   public static int runTime = 3500;
+ }
  public static final class ElevatorConstants{
    
-  public static final int elevatorMotor = 0;
+  public static final int elevatorMotor = 7;
+  public static final double elevatorSpeed = .50;
+  public static final int runTime =100;
  }
 
  public static final class ElevatorMoverConstants{
 
-  public static int elevatorMoverMotor = 0;
+  public static final int elevatorMoverMotor = 0;
+  public static final int runTime = 3500;
+  
+ }
+
+ public static final class EkimConstants{
+  public static int ekimMotor = 0;
+
  }
  
+ /*
  public static final class CollecterConstants{
 
-  public static final int collecterMotor = 0;
- }
+  public static final int collecterMotor = 6;
+ }*/
 
       public static final class AutoConstants {
         public static final double INCH = 1;
         public static final double FEET = 12;
         public static final double YARD = FEET*3;
         public static final double SECON = 1;
-      }    
-}
+      }
+    }
+  }
+      
+
+  
+

@@ -6,44 +6,50 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
+import frc.robot.Constants.DriveConstants.FlopperConstants;
+import frc.robot.subsystems.Flopper;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.DriveConstants.ShooterConstants;
-import frc.robot.subsystems.Shooter;
 
-public class Shoot extends CommandBase {
-
-  private Shooter shooter;
+public class FlopAction extends CommandBase {
   /**
-   * Creates a new Shoot.
+   * Creates a new FlopAction.
    */
-  public Shoot(Shooter _shooter) {
+
+   private Flopper flopper;
+   private long time;
+   
+  public FlopAction(Flopper flopper) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.shooter=_shooter;
-    addRequirements(shooter);
+    super();
+    this.flopper=flopper;
+    addRequirements(flopper);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ShooterConstants.shooterSpeed+=.01;
+    time=System.currentTimeMillis();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.shoot(ShooterConstants.shooterSpeed);
+    flopper.deploy(.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.shoot(0);
+    flopper.deploy(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(System.currentTimeMillis()>=time+FlopperConstants.runTime)
+    return true;
+    else
     return false;
   }
 }
