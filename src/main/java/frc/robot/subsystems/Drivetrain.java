@@ -48,6 +48,8 @@ private double ticksPerInch=ticksPerRev/wheelCircumfranceInches;
   private int rightOffset=0;
 
 
+
+
   /**
    * Creates a new Drivetrain.
    */
@@ -69,7 +71,8 @@ private double ticksPerInch=ticksPerRev/wheelCircumfranceInches;
     
       leftSon.follow(leftFather);
       rightSon.follow(rightFather);
-      leftSon.setInverted(InvertType.FollowMaster); // match whatever leftFather is
+      // leftSon.setInverted(InvertType.FollowMaster); // match whatever leftFather is
+      leftSon.setInverted(false);
       rightSon.setInverted(InvertType.FollowMaster); // match whatever rightFather is
       //rightSon.setInverted(InvertType.OpposeMaster); // opposite whatever rightFather is
 
@@ -82,6 +85,7 @@ private double ticksPerInch=ticksPerRev/wheelCircumfranceInches;
       leftFather.configOpenloopRamp(0.5); // 0.5 seconds from neutral to full output (during open-loop control)
       leftFather.configClosedloopRamp(0); // 0 disables ramping (during closed-loop control)
 
+    
   }
 
 
@@ -101,23 +105,23 @@ private double ticksPerInch=ticksPerRev/wheelCircumfranceInches;
    * The log method puts interesting information to the SmartDashboard.
    */
   public void log() {
-    SmartDashboard.putNumber("XAxis", imu.getGyroAngleX());
-    SmartDashboard.putNumber("YAxis", imu.getGyroAngleY());
-    SmartDashboard.putNumber("ZAxis", imu.getGyroAngleZ());
-    SmartDashboard.putNumber("rightVelocity",rightFather.getSelectedSensorVelocity());
-    SmartDashboard.putNumber("leftVelocity",leftFather.getSelectedSensorVelocity());
+    // SmartDashboard.putNumber("XAxis", imu.getGyroAngleX());
+    // SmartDashboard.putNumber("YAxis", imu.getGyroAngleY());
+    // SmartDashboard.putNumber("ZAxis", imu.getGyroAngleZ());
+    // SmartDashboard.putNumber("rightVelocity",rightFather.getSelectedSensorVelocity());
+    // SmartDashboard.putNumber("leftVelocity",leftFather.getSelectedSensorVelocity());
 
-    SmartDashboard.putNumber("rightPosition",getRightDistance());
-    SmartDashboard.putNumber("leftPosition" ,getLeftDistance());
+    // SmartDashboard.putNumber("rightPosition",getRightDistance());
+    // SmartDashboard.putNumber("leftPosition" ,getLeftDistance());
 
-    SmartDashboard.putNumber("Out % left", leftFather.getMotorOutputPercent());
-    SmartDashboard.putNumber("Out % right", rightFather.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Out % left", leftFather.getMotorOutputPercent());
+    // SmartDashboard.putNumber("Out % right", rightFather.getMotorOutputPercent());
 
-    SmartDashboard.putNumber("testing", rightFather.getMotorOutputPercent());
+    // SmartDashboard.putNumber("testing", rightFather.getMotorOutputPercent());
 
-    SmartDashboard.putNumber("INCHESPERPULSE", DriveConstants.INCHESPERPULSE);
-    SmartDashboard.putNumber("kEncoderDistancePerPulse", DriveConstants.kEncoderDistancePerPulse);
-    SmartDashboard.putNumber("magicNumber", DriveConstants.magicNumber);
+    // SmartDashboard.putNumber("INCHESPERPULSE", DriveConstants.INCHESPERPULSE);
+    // SmartDashboard.putNumber("kEncoderDistancePerPulse", DriveConstants.kEncoderDistancePerPulse);
+    // SmartDashboard.putNumber("magicNumber", DriveConstants.magicNumber);
 
   }
 

@@ -7,47 +7,43 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.DriveConstants.ElevatorConstants;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Drivetrain;
 
-public class ElevatorUp extends CommandBase {
+public class FineDrive extends CommandBase {
   /**
-   * Creates a new ElevatorUp.
+   * Creates a new FineDrive.
    */
-  
-  private long time;
-  private Elevator elevator;
-  public ElevatorUp(Elevator elevator) {
+  private Drivetrain drivetrain;
+  private Joystick joystick;
+  public FineDrive(Drivetrain drivetrain, Joystick joystick) {
     // Use addRequirements() here to declare subsystem dependencies.
-      this.elevator=elevator;
-      addRequirements(this.elevator);
+    super();
+    this.drivetrain = drivetrain;
+    this.joystick = joystick;
+    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time=System.currentTimeMillis();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    this.elevator.runForward(ElevatorConstants.elevatorSpeed);
+    drivetrain.arcadeDrive(0, joystick.getZ()/4.0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    this.elevator.stopMotor();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(System.currentTimeMillis()>=time+ElevatorConstants.runTime)
-    return true;
-    else
     return false;
   }
 }

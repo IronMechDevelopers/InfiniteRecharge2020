@@ -8,17 +8,21 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.UnifiedMotorController;
 
-public class RaiseBalls extends CommandBase {
+public class ReadData extends CommandBase {
+
+  private UnifiedMotorController subsystem;
   /**
-   * Creates a new RaiseBalls.
+   * Creates a new ReadShooterData.
    */
-  public RaiseBalls() {
+  public ReadData(UnifiedMotorController subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-   
+    addRequirements(subsystem);
+    this.subsystem=subsystem;
   }
 
-  // Called when the command is initially scheduled.
+// Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
@@ -26,11 +30,12 @@ public class RaiseBalls extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    subsystem.log();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
+  public void end(final boolean interrupted) {
   }
 
   // Returns true when the command should end.

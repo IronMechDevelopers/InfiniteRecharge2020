@@ -7,19 +7,31 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DriveConstants.ShooterConstants;
-
-/**
+import org.apache.commons.collections4.queue.CircularFifoQueue;
+import org.apache.commons.math3.stat.StatUtils;
+import org.apache.commons.lang3.ArrayUtils;
+/** 
  * Add your docs here.
  */
-public class Shooter extends SubsystemBase {
+public class Shooter extends UnifiedMotorController {
 
-    private Victor shooter = new Victor(ShooterConstants.shooterMotor);
     private double motorPercentage;
+    private Encoder encoder;
+    private CircularFifoQueue<Double> queue = new CircularFifoQueue<>(ShooterConstants.movingAverage);
     //feeds balls into shooter
+    public Shooter()
+    {
+        super();
+        super.setConstant(ShooterConstants.shooterMotor);
+        super.motor.setInverted(true);
+        encoder = new Encoder(0, 1);
+        encoder.setDistancePerPulse(2048);
+    }
     public void feedToShooter() {
         motorPercentage=0.0;
     }
@@ -33,19 +45,18 @@ public class Shooter extends SubsystemBase {
         motorPercentage-=Math.abs(decreaseSpeed);
     }
 
-    //shoots the balls
-    public void shoot(double _motorPercentage) {
-        this.motorPercentage=_motorPercentage;
-        shooter.set(motorPercentage);
+    public double getEncoderRate()
+    {
+        return encoder.getRate();
     }
 
-    @Override
-    public void periodic() {
-      // This method will be called once per scheduler run
-        log();
-    }
 
     public void log() {
-        SmartDashboard.putNumber("Shooting Speed", ShooterConstants.shooterSpeed);
+        // SmartDashboard.putNumber("Shooting Speed", ShooterConstants.shooterSpeed);
+        // queue.add(Math.min(10000,encoder.getRate()));
+        // double[] values = ArrayUtils.toPrimitive(queue.toArray(new Double[0]));
+        // double num = StatUtils.mean(values, 0, (ShooterConstants.movingAverage));
+        // SmartDashboard.putNumber("Encoder speed in inches",num);
     }
+
 }

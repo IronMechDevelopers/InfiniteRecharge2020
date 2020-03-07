@@ -48,45 +48,45 @@ public final class Constants {
 
  public static final class ShooterConstants {
 
-  public static final int shooterMotor =4;
+  public static final int shooterMotor = 5;
   public static double shooterSpeed=.25;
+  public static int movingAverage= 25;
   
  }
  
  public static final class FlopperConstants{
    
-  public static final int flopperMotor = 7;
-  public static final int collectMotor = 5;
+  public static final int flopperMotor = 9;
+  public static final int collecterMotor = 8;
   public static final int runTime =5000;
- }
- public static final class ElevatorPullerConstants{
-   public static final int ElevatorPullerMotor = 8;
-   public static int runTime = 3500;
  }
  public static final class ElevatorConstants{
    
   public static final int elevatorMotor = 7;
   public static final double elevatorSpeed = .50;
   public static final int runTime =100;
+public static final int lockerMotor = 6;
  }
-
+/*
  public static final class ElevatorMoverConstants{
 
   public static final int elevatorMoverMotor = 0;
   public static final int runTime = 3500;
   
  }
-
+*/
  public static final class EkimConstants{
-  public static int ekimMotor = 0;
-
+  public static int ekimMotor = 4;
+  public static int ekimMotor2 = 3;
  }
+
  
- /*
+ 
+ 
  public static final class CollecterConstants{
 
-  public static final int collecterMotor = 6;
- }*/
+  public static final int collecterMotor = 8;
+ }
 
       public static final class AutoConstants {
         public static final double INCH = 1;

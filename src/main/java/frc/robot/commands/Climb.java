@@ -6,50 +6,43 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.Constants.DriveConstants.FlopperConstants;
-import frc.robot.subsystems.Flopper;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Elevator;
 
-public class FlopAction extends CommandBase {
+public class Climb extends CommandBase {
   /**
-   * Creates a new FlopAction.
+   * Creates a new Climb.
    */
-
-   private Flopper flopper;
-   private long time;
-   
-  public FlopAction(Flopper flopper) {
+  Elevator elevator;
+  int dir;
+  public Climb(Elevator elevator,int dir) {
     // Use addRequirements() here to declare subsystem dependencies.
-    super();
-    this.flopper=flopper;
-    addRequirements(flopper);
+    this.elevator = elevator;
+    this.dir=dir;
+
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    time=System.currentTimeMillis();
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    flopper.deploy(.5);
+    elevator.lock(dir);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    flopper.deploy(0);
+    elevator.lock(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(System.currentTimeMillis()>=time+FlopperConstants.runTime)
-    return true;
-    else
     return false;
   }
 }

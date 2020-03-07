@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants.ElevatorConstants;
 
 
@@ -14,12 +16,39 @@ public class Elevator extends UnifiedMotorController {
   /**
    * Creates a new ReplaceMeSubsystem.
    */
+  private Victor locker;
+  private double lockerMotorPercentage;
   public Elevator (){
     super();
     setConstant(ElevatorConstants.elevatorMotor);
+    locker = new Victor(ElevatorConstants.lockerMotor);
   }
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+
+  
+  public void climb(double _motorPercentage) {
+    this.motorPercentage=_motorPercentage * -1;
+    lockerMotorPercentage=_motorPercentage;
+    motor.set(motorPercentage);
+    locker.set(lockerMotorPercentage);
   }
+  public void lock(double lockerMotorPercentage){
+    locker.set(lockerMotorPercentage);
+  }
+
+  public void log()
+  {
+    SmartDashboard.putNumber("Locker Speed", lockerMotorPercentage);
+    SmartDashboard.putNumber("Elevator Speed", super.motorPercentage);
+  }
+
+  public double getLockerMotorPercentage() {
+    return lockerMotorPercentage;
+  }
+
+  public void setLockerMotorPercentage(double lockerMotorPercentage) {
+    this.lockerMotorPercentage = lockerMotorPercentage;
+  }
+
+  
+
 }

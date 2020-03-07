@@ -8,18 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.Shooter;
 
-public class Collect extends CommandBase {
-  private Collector flopper;
+public class BangBang extends CommandBase {
   /**
-   * Creates a new collect.
+   * Creates a new BangBang.
    */
-  public Collect(Collector flopper) {
+  public Shooter shooter;
+  private int targetSpeed; 
+  public BangBang(Shooter shooter,int targetSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
-    super();
-    this.flopper = flopper;
-    addRequirements(flopper);
+    this.shooter = shooter;
+    this.targetSpeed = targetSpeed;
+    addRequirements(shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -30,13 +31,17 @@ public class Collect extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    flopper.collect();
+    if (shooter.getEncoderRate() >targetSpeed){
+      shooter.runForward(0);
+    }else{
+      shooter.runForward(1);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    flopper.stopCollect();
+    shooter.runForward(0);
   }
 
   // Returns true when the command should end.

@@ -7,27 +7,22 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants.FlopperConstants;
 
-public class Flopper extends UnifiedMotorController {
-    //flops the flopper and unflops the flopper
-    private boolean isIn=true;
+/**
+ * Add your docs here.
+ */
+public class Flopper extends UnifiedMotorController{
 
-    public Flopper() {
-        super();        
-        setConstant(FlopperConstants.flopperMotor);
+    public Flopper()
+    {
+        super();
+        super.setConstant(FlopperConstants.flopperMotor);
     }
-    
-    public void deploy(double _motorPercentage) {
-    //inverts position of flopper
-    //will be bound to a button as a toggle flopper out/flopper in
-        if (isIn){
-             isIn=false;
-             runBackwards(_motorPercentage);
-        }else{
-            isIn=true;
-             runForward(_motorPercentage);
-        }
+
+    public void log()
+    {
+        SmartDashboard.putNumber("Flopper", super.motorPercentage);
     }
 }
-

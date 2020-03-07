@@ -15,14 +15,10 @@ import frc.robot.Constants.DriveConstants.FlopperConstants;
  */
 public class Collector extends UnifiedMotorController {
 
-    private Victor collectMotor = new Victor(FlopperConstants.collectMotor);
 
-	public void collect() {
-        collectMotor.set(.75);
+	public Collector() {
+        super();
+        super.setConstant(FlopperConstants.collecterMotor);
 	}
-
-	public void stopCollect() {
-        collectMotor.set(0);
-    }
     
 }

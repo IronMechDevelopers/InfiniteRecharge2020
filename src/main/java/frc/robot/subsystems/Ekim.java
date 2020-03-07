@@ -8,24 +8,30 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants.EkimConstants;
 
 /**
  * Add your docs here.
  */
 public class Ekim extends UnifiedMotorController {
-    private Victor ekimMotor;
-    
+    private Victor ekim2;
     public Ekim(){
         super();
         setConstant(EkimConstants.ekimMotor);
+        ekim2 = new Victor(EkimConstants.ekimMotor2);
+        ekim2.setInverted(true);
     }
 
-    public void ekim(){
-        ekimMotor.set(.5);
-    }
-    public void stopEkim(){
-        ekimMotor.set(0);
+    @Override
+    public void run(double _motorPercentage) {
+        this.motorPercentage=_motorPercentage;
+        motor.set(motorPercentage);
+        ekim2.set(_motorPercentage);
     }
 
+    public void log()
+    {
+        SmartDashboard.putNumber("Ekim",this.motorPercentage);
+    }
 }
