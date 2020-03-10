@@ -24,12 +24,14 @@ public class Elevator extends UnifiedMotorController {
     locker = new Victor(ElevatorConstants.lockerMotor);
   }
 
-  
-  public void climb(double _motorPercentage) {
-    this.motorPercentage=_motorPercentage * -1;
+  @Override
+  public void run(double _motorPercentage) {
+    this.motorPercentage=_motorPercentage;
     lockerMotorPercentage=_motorPercentage;
     motor.set(motorPercentage);
-    locker.set(lockerMotorPercentage);
+    if(_motorPercentage<=0){
+      locker.set(lockerMotorPercentage);
+    }
   }
   public void lock(double lockerMotorPercentage){
     locker.set(lockerMotorPercentage);

@@ -31,6 +31,7 @@ public class StopEverything extends ParallelCommandGroup {
       new TurnOnMotor(shooter, 0),
       new TurnOnMotor(collector, 0),
       new TurnOnMotor(flopper, 0));
+
       
     
   }

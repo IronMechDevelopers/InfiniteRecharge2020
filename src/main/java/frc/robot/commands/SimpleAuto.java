@@ -27,14 +27,14 @@ public class SimpleAuto extends SequentialCommandGroup {
     // super(new FooCommand(), new BarCommand());
     super();
     addCommands(
-      new TurnOnMotor(flopper, .10).withTimeout(.25),
-      new DriveStraight(drivetrain).withTimeout(.5),
+      new TurnOnMotor(flopper,-.25).withTimeout(.75),
       new ParallelCommandGroup(
-        new TurnOnMotor(shooter, .9),
+        new DriveStraight(drivetrain).withTimeout(3.5),
+        new TurnOnMotor(shooter, .95),
         new SequentialCommandGroup(
-            new WaitCommand(3),
-            new TurnOnMotor(ekim,.25))
+            new WaitCommand(3.9),
+            new TurnOnMotor(ekim,.35)
         )
-    );
+    ));
   }
 }

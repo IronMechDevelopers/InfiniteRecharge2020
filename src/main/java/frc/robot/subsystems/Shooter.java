@@ -29,8 +29,21 @@ public class Shooter extends UnifiedMotorController {
         super();
         super.setConstant(ShooterConstants.shooterMotor);
         super.motor.setInverted(true);
-        encoder = new Encoder(0, 1);
+        encoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
         encoder.setDistancePerPulse(2048);
+
+        // Configures the encoder to consider itself stopped after .1 seconds
+        encoder.setMaxPeriod(.1);
+
+        // Configures the encoder to consider itself stopped when its rate is below 10
+        encoder.setMinRate(10);
+
+        // Reverses the direction of the encoder
+        encoder.setReverseDirection(true);
+
+        // Configures an encoder to average its period measurement over 5 samples
+        // Can be between 1 and 127 samples
+        encoder.setSamplesToAverage(5);
     }
     public void feedToShooter() {
         motorPercentage=0.0;
@@ -57,6 +70,7 @@ public class Shooter extends UnifiedMotorController {
         // double[] values = ArrayUtils.toPrimitive(queue.toArray(new Double[0]));
         // double num = StatUtils.mean(values, 0, (ShooterConstants.movingAverage));
         // SmartDashboard.putNumber("Encoder speed in inches",num);
+        SmartDashboard.putNumber("Encoder speed in inches",encoder.getRate());
     }
 
 }

@@ -28,7 +28,7 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.arcadeDrive(.25, 0);
+    drivetrain.arcadeDrive(-.45, 0);
     drivetrain.log();
   }
 
