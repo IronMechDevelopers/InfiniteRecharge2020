@@ -15,19 +15,19 @@ import frc.robot.Constants.DriveConstants.EkimConstants;
  * Add your docs here.
  */
 public class Ekim extends UnifiedMotorController {
-    private Victor ekim2;
+    private Victor back;
     public Ekim(){
         super();
         setConstant(EkimConstants.ekimMotor);
-        ekim2 = new Victor(EkimConstants.ekimMotor2);
-        ekim2.setInverted(true);
+        back = new Victor(EkimConstants.backEkimMotor);
+        back.setInverted(true);
     }
 
     @Override
     public void run(double _motorPercentage) {
         this.motorPercentage=_motorPercentage;
         motor.set(motorPercentage);
-        ekim2.set(_motorPercentage);
+        back.set(_motorPercentage*1.5);
     }
 
     public void log()

@@ -65,9 +65,10 @@ public final class Constants {
 
         public static double magicNumber =  (kMaxRPM  / 600) * (kSensorUnitsPerRotation / kGearRatio);
 
-        public static double linearize(double x1, double y1, double x2, double y2, double input){
-          Double m = (y2-y1)/(x2-x1);
-          Double b = y1-(-m * x1);
+        public static double linearize(final double x1, final double y1, final double x2, final double y2,
+        final double input) {
+      final Double m = (y2 - y1) / (x2 - x1);
+      final Double b = y1 - (-m * x1);
           return m*input+b;
       }
 
@@ -102,7 +103,7 @@ public static final int lockerMotor = 6;
 */
  public static final class EkimConstants{
   public static int ekimMotor = 4;
-  public static int ekimMotor2 = 3;
+  public static int backEkimMotor = 3;
  }
 
  

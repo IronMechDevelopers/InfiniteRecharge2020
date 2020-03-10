@@ -15,9 +15,12 @@ public class DriveStraight extends CommandBase {
    * Creates a new DriveStraight.
    */
   private Drivetrain drivetrain;
+  //this is the distance for auto 14111;
   public DriveStraight(Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
+    super();
     this.drivetrain = drivetrain;
+    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -28,7 +31,8 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    drivetrain.arcadeDrive(-.45, 0);
+    //was at .45
+    drivetrain.arcadeDrive(-.65, 0);
     drivetrain.log();
   }
 

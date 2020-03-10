@@ -104,6 +104,7 @@ private final DifferentialDrive m_drive;
       leftFather.configOpenloopRamp(0.5); // 0.5 seconds from neutral to full output (during open-loop control)
       leftFather.configClosedloopRamp(0); // 0 disables ramping (during closed-loop control)
 
+
           // Let's name the sensors on the LiveWindow
 
           m_leftMotor = new SpeedControllerGroup(leftFather, leftSon);
@@ -133,6 +134,8 @@ private final DifferentialDrive m_drive;
     SmartDashboard.putNumber("leftVelocity",leftFather.getSelectedSensorVelocity());
 
     SmartDashboard.putNumber("Velocity",(rightFather.getSelectedSensorVelocity()+leftFather.getSelectedSensorVelocity())/2.0);
+
+    SmartDashboard.putNumber("Distance:", rightFather.getSelectedSensorPosition());
 
 
 

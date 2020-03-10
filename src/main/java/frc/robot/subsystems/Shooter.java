@@ -70,7 +70,15 @@ public class Shooter extends UnifiedMotorController {
         // double[] values = ArrayUtils.toPrimitive(queue.toArray(new Double[0]));
         // double num = StatUtils.mean(values, 0, (ShooterConstants.movingAverage));
         // SmartDashboard.putNumber("Encoder speed in inches",num);
-        SmartDashboard.putNumber("Encoder speed in inches",encoder.getRate());
+        SmartDashboard.putNumber("Shooter Speed",encoder.getRate());
+        if(encoder.getRate()>=500)
+        {
+        SmartDashboard.putString("Shoot?","YES");
+        }
+        else
+        {
+            SmartDashboard.putString("Shoot?","NO");
+        }
     }
 
 }

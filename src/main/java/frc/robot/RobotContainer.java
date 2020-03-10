@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.Drivetrain;
@@ -23,10 +22,12 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Shooter;
 import frc.robot.commands.Climb;
 import frc.robot.commands.Drive;
+import frc.robot.commands.DriveStraight;
 import frc.robot.commands.FineDrive;
 import frc.robot.commands.RadTest;
 import frc.robot.commands.ReadData;
 import frc.robot.commands.SimpleAuto;
+import frc.robot.commands.SimpleAutoWait;
 import frc.robot.commands.StopEverything;
 import frc.robot.commands.TurnOnMotor;
 import frc.robot.subsystems.Flopper;
@@ -74,8 +75,12 @@ public class RobotContainer {
     SmartDashboard.putData(collectorSubsystem);
     SmartDashboard.putData(ekimSubsystem);
 
-    autoChooser.setDefaultOption("Simple","simple stuff");
-    autoChooser.addOption("Other Option","Here is another option");
+    autoChooser.setDefaultOption("Simple","A");
+    autoChooser.addOption("Wait 1","B");
+    autoChooser.addOption("Wait 2","C");
+    autoChooser.addOption("Wait 3","D");
+    autoChooser.addOption("Wait 4","E");
+    autoChooser.addOption("Wait 5","F");
     SmartDashboard.putData("Auto Options", autoChooser);
     
     
@@ -87,13 +92,40 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        if(this.getAuto().equals("Simple"))
+        if(this.getAuto().equals("A"))
         {
+            System.out.println("OPTION A");
             return new SimpleAuto(flopperSubsystem, m_robotDrive, m_shooter, ekimSubsystem);
+        }
+        else if(this.getAuto().equals("B"))
+        {
+            System.out.println("OPTION B");
+            return new SimpleAutoWait(flopperSubsystem, m_robotDrive, m_shooter, ekimSubsystem,1);
+        }
+        else if(this.getAuto().equals("C"))
+        {
+            System.out.println("OPTION C");
+            return new SimpleAutoWait(flopperSubsystem, m_robotDrive, m_shooter, ekimSubsystem,2);
+        }
+        else if(this.getAuto().equals("D"))
+        {
+            System.out.println("OPTION D");
+            return new SimpleAutoWait(flopperSubsystem, m_robotDrive, m_shooter, ekimSubsystem,3);
+        }
+        else if(this.getAuto().equals("E"))
+        {
+            System.out.println("OPTION E");
+            return new SimpleAutoWait(flopperSubsystem, m_robotDrive, m_shooter, ekimSubsystem,4);
+        }
+        else if(this.getAuto().equals("F"))
+        {
+            System.out.println("OPTION F");
+            return new SimpleAutoWait(flopperSubsystem, m_robotDrive, m_shooter, ekimSubsystem,5);
         }
         else
         {
-            return new TurnOnMotor(m_shooter,-.5);
+            System.out.println("Other");
+            return new DriveStraight(m_robotDrive).withTimeout(3.5);
         }
     }
 
@@ -115,7 +147,9 @@ public class RobotContainer {
         final JoystickButton flopperOn = new JoystickButton(driverRightStick, 1);
         final JoystickButton ekimDown = new JoystickButton(copilot, 2);        
         final JoystickButton ekimDown2 = new JoystickButton(driverRightStick, 4);
-        final JoystickButton lockerButton = new JoystickButton(copilot, 8);
+        final JoystickButton lockerButton = new JoystickButton(copilot, 6);
+        final JoystickButton lockerButton2 = new JoystickButton(copilot, 7);
+
         final JoystickButton ekimCollector = new JoystickButton(copilot, 5);
         final JoystickButton stop2 = new JoystickButton(copilot, 10);
 
@@ -141,6 +175,7 @@ public class RobotContainer {
         
         ekimDown.whileHeld(new TurnOnMotor(ekimSubsystem,-.5));
         lockerButton.whileHeld(new Climb(elvatorSubsystem,1));
+        lockerButton2.whileHeld(new Climb(elvatorSubsystem,-1));
         ekimCollector.whileHeld(new TurnOnMotor(ekimSubsystem,.5).alongWith(new TurnOnMotor(collectorSubsystem,1)));
 
         ekimDown2.whileHeld(new TurnOnMotor(ekimSubsystem,-.8));

@@ -7,8 +7,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Ekim;
@@ -18,14 +18,16 @@ import frc.robot.subsystems.Shooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class SimpleAuto extends SequentialCommandGroup {
+public class SimpleAutoWait extends SequentialCommandGroup {
   /**
-   * Creates a new SimpleAuto.
+   * Creates a new SimpleAutoWait.
    */
-  public SimpleAuto(Flopper flopper, Drivetrain drivetrain, Shooter shooter, Ekim ekim) {
+  public SimpleAutoWait(Flopper flopper, Drivetrain drivetrain, Shooter shooter, Ekim ekim, int wait) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     super();
+        // Add your commands in the super() call, e.g.
+    // super(new FooCommand(), new BarCommand());
     addCommands(
       new TurnOnMotor(flopper,-.25).withTimeout(.75),
       new ParallelCommandGroup(
@@ -33,8 +35,9 @@ public class SimpleAuto extends SequentialCommandGroup {
         new TurnOnMotor(shooter, .95),
         new SequentialCommandGroup(
             new WaitCommand(3.9),
+            new WaitCommand(wait),
             new TurnOnMotor(ekim,.35)
         )
     ));
   }
-}
+  }
