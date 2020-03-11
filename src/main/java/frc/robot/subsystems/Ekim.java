@@ -7,22 +7,31 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.DriveConstants.FlopperConstants;
+import frc.robot.Constants.DriveConstants.EkimConstants;
 
 /**
  * Add your docs here.
  */
-public class Flopper extends UnifiedMotorController{
-
-    public Flopper()
-    {
+public class Ekim extends UnifiedMotorController {
+    private Victor back;
+    public Ekim(){
         super();
-        super.setConstant(FlopperConstants.flopperMotor);
+        setConstant(EkimConstants.ekimMotor);
+        back = new Victor(EkimConstants.backEkimMotor);
+        back.setInverted(true);
+    }
+
+    @Override
+    public void run(double _motorPercentage) {
+        this.motorPercentage=_motorPercentage;
+        motor.set(motorPercentage);
+        back.set(_motorPercentage*1.5);
     }
 
     public void log()
     {
-        SmartDashboard.putNumber("Flopper", super.motorPercentage);
+        SmartDashboard.putNumber("Ekim",this.motorPercentage);
     }
 }

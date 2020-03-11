@@ -17,14 +17,37 @@ package frc.robot;
  */
 public final class Constants {
 
+  	/**
+	 * Which PID slot to pull gains from. Starting 2018, you can choose from
+	 * 0,1,2 or 3. Only the first two (0,1) are visible in web-based
+	 * configuration.
+	 */
+	public static final int kSlotIdx = 0;
+
+	/**
+	 * Talon SRX/ Victor SPX will supported multiple (cascaded) PID loops. For
+	 * now we just want the primary one.
+	 */
+	public static final int kPIDLoopIdx = 0;
+
+	/**
+	 * set to zero to skip waiting for confirmation, set to nonzero to wait and
+	 * report to DS if action fails.
+	 */
+	public static final int kTimeoutMs = 30;
+
+	/**
+	 * Gains used in Motion Magic, to be adjusted accordingly
+     * Gains(kp, ki, kd, kf, izone, peak output);
+     */
+    public static final Gains kGains = new Gains(0.2, 0.0, 0.0, 0.2, 0, 1.0);
+
     public static final class DriveConstants {
-        public static final int kLeftMotor1Port = 0;
-        public static final int kLeftMotor2Port = 1;
-        public static final int kRightMotor1Port = 2;
-        public static final int kRightMotor2Port = 3;
+        public static final int RIGHTSON = 1;
+        public static final int LEFTSON = 2;
+        public static final int RIGHTFATHER = 3;
+        public static final int LEFTFATHER = 4;
     
-        public static final int[] kLeftEncoderPorts = new int[]{0, 1};
-        public static final int[] kRightEncoderPorts = new int[]{2, 3};
         public static final boolean kLeftEncoderReversed = false;
         public static final boolean kRightEncoderReversed = true;
     
@@ -36,15 +59,60 @@ public final class Constants {
             // Assumes the encoders are directly mounted on the wheel shafts
             (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
 
-            double kMaxRPM = 5330;
-            double kSensorUnitsPerRotation = kEncoderCPR;
-            double kGearRatio=10.71;
-      
-      
-            double magicNumber =  (kMaxRPM  / 600) * (kSensorUnitsPerRotation / kGearRatio);
+        public static double kMaxRPM = 5330;
+        public static double kSensorUnitsPerRotation = kEncoderCPR;
+        public static double kGearRatio=10.71;
+
+        public static double magicNumber =  (kMaxRPM  / 600) * (kSensorUnitsPerRotation / kGearRatio);
+
+        public static double linearize(final double x1, final double y1, final double x2, final double y2,
+        final double input) {
+      final Double m = (y2 - y1) / (x2 - x1);
+      final Double b = y1 - (-m * x1);
+          return m*input+b;
       }
 
+ public static final class ShooterConstants {
 
+  public static final int shooterMotor = 5;
+  public static double shooterSpeed=.25;
+  public static int movingAverage= 25;
+  
+ }
+ 
+ public static final class FlopperConstants{
+   
+  public static final int flopperMotor = 9;
+  public static final int collecterMotor = 8;
+  public static final int runTime =5000;
+ }
+ public static final class ElevatorConstants{
+   
+  public static final int elevatorMotor = 7;
+  public static final double elevatorSpeed = .50;
+  public static final int runTime =100;
+public static final int lockerMotor = 6;
+ }
+/*
+ public static final class ElevatorMoverConstants{
+
+  public static final int elevatorMoverMotor = 0;
+  public static final int runTime = 3500;
+  
+ }
+*/
+ public static final class EkimConstants{
+  public static int ekimMotor = 4;
+  public static int backEkimMotor = 3;
+ }
+
+ 
+ 
+ 
+ public static final class CollecterConstants{
+
+  public static final int collecterMotor = 8;
+ }
 
       public static final class AutoConstants {
         public static final double INCH = 1;
@@ -52,7 +120,9 @@ public final class Constants {
         public static final double YARD = FEET*3;
         public static final double SECON = 1;
       }
-
+    }
+  }
       
 
-}
+  
+

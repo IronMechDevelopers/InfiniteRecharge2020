@@ -7,22 +7,18 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Victor;
 import frc.robot.Constants.DriveConstants.FlopperConstants;
 
 /**
  * Add your docs here.
  */
-public class Flopper extends UnifiedMotorController{
+public class Collector extends UnifiedMotorController {
 
-    public Flopper()
-    {
+
+	public Collector() {
         super();
-        super.setConstant(FlopperConstants.flopperMotor);
-    }
-
-    public void log()
-    {
-        SmartDashboard.putNumber("Flopper", super.motorPercentage);
-    }
+        super.setConstant(FlopperConstants.collecterMotor);
+	}
+    
 }
