@@ -82,15 +82,15 @@ private final DifferentialDrive m_drive;
     leftSon.setNeutralMode(brakeMode);
     leftFather.setSensorPhase(true);
     rightFather.setSensorPhase(true);
-    leftFather.setInverted(true);
+    leftFather.setInverted(true); 
     rightFather.setInverted(true);
     
     
       leftSon.follow(leftFather);
       rightSon.follow(rightFather);
-      // leftSon.setInverted(InvertType.FollowMaster); // match whatever leftFather is
-      rightSon.setInverted(InvertType.FollowMaster);
-      leftSon.setInverted(InvertType.FollowMaster); // match whatever rightFather is
+      //leftSon.setInverted(InvertType.FollowMaster); // match whatever leftFather is
+      //rightSon.setInverted(InvertType.FollowMaster
+      //leftSon.setInverted(InvertType.FollowMaster); // match whatever rightFather is
       //rightSon.setInverted(InvertType.OpposeMaster); // opposite whatever rightFather is
 
     setTalon(leftFather);
