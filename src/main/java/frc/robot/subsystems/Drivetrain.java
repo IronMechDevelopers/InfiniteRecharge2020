@@ -75,6 +75,9 @@ private final DifferentialDrive m_drive;
     leftFather.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     rightFather.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 
+    leftFather.configFactoryDefault();
+    rightFather.configFactoryDefault();
+
 
     rightFather.setNeutralMode(brakeMode);
     leftFather.setNeutralMode(brakeMode);
@@ -160,6 +163,12 @@ private final DifferentialDrive m_drive;
 public Object arcadeDrive(double fwd, double rot) {
   // rightFather.set(ControlMode.PercentOutput,fwd+rot);
   // leftFather.set(ControlMode.PercentOutput,fwd-rot);
+  if (Math.abs(fwd)<=.01){
+    fwd = 0;
+  }
+  if (Math.abs(rot)<=.01){
+    rot = 0;
+  }
   m_drive.arcadeDrive(fwd, -1*rot);
   // m_drive.tankDrive(left, right);
   return null;
@@ -174,12 +183,10 @@ public Object arcadeDrive(double fwd, double rot) {
     // rightOffset = rightFather.getSelectedSensorPosition();
   }
   public int getLeftTicks() {
-    return 0;
-    // return leftFather.getSelectedSensorPosition() - leftOffset;
+    return leftFather.getSelectedSensorPosition();
   }
   public int getRightTicks() {
-    return 0;
-    // return rightFather.getSelectedSensorPosition() - rightOffset;
+    return rightFather.getSelectedSensorPosition();
 
   }
     /**
@@ -199,6 +206,8 @@ public Object arcadeDrive(double fwd, double rot) {
   public double getAverageDistance() {
     return (getLeftDistance()+getRightDistance())/(2.0);
   }
+
+  
 
   public void setTalon(WPI_TalonSRX _talon)
   {

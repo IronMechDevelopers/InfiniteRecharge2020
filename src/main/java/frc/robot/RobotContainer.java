@@ -26,6 +26,7 @@ import frc.robot.commands.DriveStraight;
 import frc.robot.commands.FineDrive;
 import frc.robot.commands.RadTest;
 import frc.robot.commands.ReadData;
+import frc.robot.commands.TurnWheelOneTime;
 import frc.robot.commands.SimpleAuto;
 import frc.robot.commands.SimpleAutoWait;
 import frc.robot.commands.StopEverything;
@@ -138,7 +139,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         //all the buttons
         final JoystickButton shooterOn = new JoystickButton(copilot, 1);
-        final JoystickButton collectorOn = new JoystickButton(driverLeftStick, 5);
+        //final JoystickButton collectorOn = new JoystickButton(driverLeftStick, 5);
         final JoystickButton ekimOn = new JoystickButton(copilot, 3);
         final JoystickButton ekimOn2 = new JoystickButton(driverRightStick, 6);
         final JoystickButton stop = new JoystickButton(driverLeftStick, 1);
@@ -151,13 +152,19 @@ public class RobotContainer {
         final JoystickButton lockerButton2 = new JoystickButton(copilot, 7);
 
         final JoystickButton ekimCollector = new JoystickButton(copilot, 5);
+
+        final JoystickButton driveOneRot = new JoystickButton(copilot, 8);
+        
+        final JoystickButton coCollectorIn = new JoystickButton(copilot, 10);
+        final JoystickButton coCollectorOut = new JoystickButton(copilot, 11);
+
         final JoystickButton stop2 = new JoystickButton(copilot, 10);
 
         final JoystickButton activateFineDrive = new JoystickButton(driverRightStick, 2);
         final JoystickButton shootBack = new JoystickButton(driverLeftStick, 8);
         final JoystickButton collectBack = new JoystickButton(driverLeftStick, 3);
         //final JoystickButton shooterBangBang = new JoystickButton(driverRightStick, 1);
-        final JoystickButton auto = new JoystickButton(copilot, 11);
+        //final JoystickButton auto = new JoystickButton(copilot, 11);
 
         final JoystickButton rad = new JoystickButton(copilot, 9);
 
@@ -165,9 +172,11 @@ public class RobotContainer {
 
         //actions
         shooterOn.toggleWhenPressed(new TurnOnMotor(m_shooter,1));
-        collectorOn.toggleWhenPressed(new TurnOnMotor(collectorSubsystem,1));
+        //collectorOn.toggleWhenPressed(new TurnOnMotor(collectorSubsystem,1));
         ekimOn.whileHeld(new TurnOnMotor(ekimSubsystem,.5));
         ekimOn2.whileHeld(new TurnOnMotor(ekimSubsystem,.8));
+
+        driveOneRot.whenPressed(new TurnWheelOneTime(m_robotDrive));
 
         elevatorUp.whileHeld(new TurnOnMotor(elvatorSubsystem,1));
         elevatorDown.whileHeld(new TurnOnMotor(elvatorSubsystem,-1));
@@ -180,10 +189,14 @@ public class RobotContainer {
 
         ekimDown2.whileHeld(new TurnOnMotor(ekimSubsystem,-.8));
         collectBack.toggleWhenPressed(new TurnOnMotor(collectorSubsystem,-.5));
+        
+        coCollectorIn.whileHeld(new TurnOnMotor(collectorSubsystem,.75));
+        coCollectorOut.whileHeld(new TurnOnMotor(collectorSubsystem,-.75));
+
         shootBack.toggleWhenPressed(new TurnOnMotor(m_shooter,-.5));
         //shooterBangBang.whileHeld(new BangBang(m_shooter,5000));
         activateFineDrive.whileHeld(new FineDrive(m_robotDrive,driverRightStick));
-        auto.whenPressed(new SimpleAuto(flopperSubsystem, m_robotDrive, m_shooter, ekimSubsystem));
+        //auto.whenPressed(new SimpleAuto(flopperSubsystem, m_robotDrive, m_shooter, ekimSubsystem));
 
 
         //stops

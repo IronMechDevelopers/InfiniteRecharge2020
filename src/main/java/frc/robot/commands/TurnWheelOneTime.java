@@ -7,46 +7,54 @@
 
 package frc.robot.commands;
 
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.UnifiedMotorController;
+import frc.robot.subsystems.Drivetrain;
 
-public class TurnOnMotor extends CommandBase {
-  /**
-   * Creates a new TurnOnMotor.
-   */
-  private UnifiedMotorController subsystem;
+public class TurnWheelOneTime extends CommandBase {
+
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private final Drivetrain drivetrain;
+  private int lStop;
+  private int rStop;
+
   
-  private double speed;
-  public TurnOnMotor(UnifiedMotorController subsystem, double speed) {
+  /**
+   * Creates a new TurnWheelOneTime.
+   */
+  public TurnWheelOneTime(Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
-    super();
-    this.subsystem=subsystem;
-    this.speed=speed;
-    addRequirements(subsystem);
-
+    this.drivetrain = drivetrain;
+    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    lStop = drivetrain.getLeftTicks() + 1024;
+    rStop = drivetrain.getRightTicks() + 1024;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    subsystem.run(speed);
-    subsystem.periodic();
+    drivetrain.arcadeDrive(-.1, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    subsystem.run(0);
+    drivetrain.arcadeDrive(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    //if (lStop >= drivetrain.getLeftTicks() && rStop >= drivetrain.getRightTicks()){
+    if (lStop >= drivetrain.getLeftTicks()){
+
+      return true;
+    }
     return false;
   }
 }

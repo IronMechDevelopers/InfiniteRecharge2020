@@ -66,7 +66,7 @@ public final class Constants {
         public static double magicNumber =  (kMaxRPM  / 600) * (kSensorUnitsPerRotation / kGearRatio);
 
         public static double linearize(final double x1, final double y1, final double x2, final double y2,
-        final double input) {
+        final double input) {//TODO deadzone?
       final Double m = (y2 - y1) / (x2 - x1);
       final Double b = y1 - (-m * x1);
           return m*input+b;
