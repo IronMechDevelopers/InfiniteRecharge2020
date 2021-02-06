@@ -59,6 +59,8 @@ private final DifferentialDrive m_drive;
   private int leftOffset=0;
   private int rightOffset=0;
 
+  private double rightGoal;
+
 
 
 
@@ -115,7 +117,6 @@ private final DifferentialDrive m_drive;
           m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
     addChild("Drive", m_drive);
     addChild("Gyro", m_gyro);
-
     
   }
 
@@ -139,8 +140,6 @@ private final DifferentialDrive m_drive;
     SmartDashboard.putNumber("Velocity",(rightFather.getSelectedSensorVelocity()+leftFather.getSelectedSensorVelocity())/2.0);
 
     SmartDashboard.putNumber("Distance:", rightFather.getSelectedSensorPosition());
-
-
 
   }
 
@@ -237,6 +236,20 @@ public Object arcadeDrive(double fwd, double rot) {
 
 		/* Zero the sensor once on robot boot up */
 		_talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+  }
+
+  public void setRightVelocity (double velocity){
+    rightFather.set(ControlMode.Velocity,0);
+  }
+
+  public void setRightGoal(double rightGoal)
+  {
+    this.rightGoal = rightGoal+ rightFather.getSelectedSensorPosition();
+  }
+
+  public void setRightPosition (double Position){
+    SmartDashboard.putNumber("goal", rightGoal);
+    rightFather.set(ControlMode.Position,rightGoal);
   }
 
 }

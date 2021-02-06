@@ -27,6 +27,7 @@ import frc.robot.commands.FineDrive;
 import frc.robot.commands.RadTest;
 import frc.robot.commands.ReadData;
 import frc.robot.commands.TurnWheelOneTime;
+import frc.robot.commands.RightGoToPos;
 import frc.robot.commands.SimpleAuto;
 import frc.robot.commands.SimpleAutoWait;
 import frc.robot.commands.StopEverything;
@@ -143,18 +144,19 @@ public class RobotContainer {
         final JoystickButton ekimOn = new JoystickButton(copilot, 3);
         final JoystickButton ekimOn2 = new JoystickButton(driverRightStick, 6);
         final JoystickButton stop = new JoystickButton(driverLeftStick, 1);
-        final JoystickButton elevatorUp = new JoystickButton(driverRightStick, 5);
-        final JoystickButton elevatorDown = new JoystickButton(driverRightStick, 3);
+        final JoystickButton elevatorUp = new JoystickButton(copilot, 7);
+        final JoystickButton elevatorDown = new JoystickButton(copilot, 6);
         final JoystickButton flopperOn = new JoystickButton(driverRightStick, 1);
         final JoystickButton ekimDown = new JoystickButton(copilot, 2);        
         final JoystickButton ekimDown2 = new JoystickButton(driverRightStick, 4);
-        final JoystickButton lockerButton = new JoystickButton(copilot, 6);
-        final JoystickButton lockerButton2 = new JoystickButton(copilot, 7);
+        //final JoystickButton lockerButton = new JoystickButton(copilot, 6);
+        //final JoystickButton lockerButton2 = new JoystickButton(copilot, 7);
 
         final JoystickButton ekimCollector = new JoystickButton(copilot, 5);
 
         final JoystickButton driveOneRot = new JoystickButton(copilot, 8);
-        
+        final JoystickButton driveRightdistance = new JoystickButton(driverRightStick, 10);       
+
         final JoystickButton coCollectorIn = new JoystickButton(copilot, 10);
         final JoystickButton coCollectorOut = new JoystickButton(copilot, 11);
 
@@ -177,14 +179,15 @@ public class RobotContainer {
         ekimOn2.whileHeld(new TurnOnMotor(ekimSubsystem,.8));
 
         driveOneRot.whenPressed(new TurnWheelOneTime(m_robotDrive));
+        driveRightdistance.whenPressed(new RightGoToPos(m_robotDrive, 4156.0));
 
         elevatorUp.whileHeld(new TurnOnMotor(elvatorSubsystem,1));
         elevatorDown.whileHeld(new TurnOnMotor(elvatorSubsystem,-1));
         flopperOn.whileHeld(new TurnOnMotor(flopperSubsystem,.5));
         
         ekimDown.whileHeld(new TurnOnMotor(ekimSubsystem,-.5));
-        lockerButton.whileHeld(new Climb(elvatorSubsystem,1));
-        lockerButton2.whileHeld(new Climb(elvatorSubsystem,-1));
+        //lockerButton.whileHeld(new Climb(elvatorSubsystem,1));
+        //lockerButton2.whileHeld(new Climb(elvatorSubsystem,-1));
         ekimCollector.whileHeld(new TurnOnMotor(ekimSubsystem,.5).alongWith(new TurnOnMotor(collectorSubsystem,1)));
 
         ekimDown2.whileHeld(new TurnOnMotor(ekimSubsystem,-.8));
