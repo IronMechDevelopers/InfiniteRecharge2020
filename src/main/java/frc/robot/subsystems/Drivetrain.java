@@ -239,7 +239,16 @@ public Object arcadeDrive(double fwd, double rot) {
   }
 
   public void setRightVelocity (double velocity){
-    rightFather.set(ControlMode.Velocity,0);
+    rightFather.set(ControlMode.Velocity, velocity);
+  }
+
+  public void setLeftVelocity (double velocity){
+    leftFather.set(ControlMode.Velocity, velocity);
+  }
+
+  public void setVelocity(double left, double right){
+    setLeftVelocity(left);
+    setRightVelocity(right);
   }
 
   public void setRightGoal(double rightGoal)
