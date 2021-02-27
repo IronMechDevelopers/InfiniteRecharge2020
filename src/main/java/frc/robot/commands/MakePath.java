@@ -9,7 +9,9 @@ package frc.robot.commands;
 
 import java.util.List;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -20,28 +22,43 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.DriveConstants.AutoConstants;
 import frc.robot.subsystems.Drivetrain;
 
 public class MakePath extends Command {
-  Drivetrain m_robotDrive;
+  /*Drivetrain m_robotDrive;
+  public static final DifferentialDriveKinematics kDriveKinematics;
 
-  public MakePath() {
-    DifferentialDriveKinematics dDrive = new DifferentialDriveKinematics(0.589788);
+  double ksVolts = 0;
+  double kvVoltSecondsPerMeter = 0;
+  double kaVoltSecondsSquaredPerMeter = 0;
+
+  public MakePath(DifferentialDriveKinematics kDriveKinematics) {
+    this.kDriveKinematics = kDriveKinematics;
+  }
+
+   /* Use this to pass the autonomous command to the main {@link Robot} class.
+   *
+   * @return the command to run in autonomous
+   *
+  public Command getAutonomousCommand() {
+
     // Create a voltage constraint to ensure we don't accelerate too fast
     var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(0.22,
-                                       1.98,
-                                       0.2),
-            dDrive,
+            new SimpleMotorFeedforward(ksVolts,
+            kvVoltSecondsPerMeter,
+            kaVoltSecondsSquaredPerMeter),
+            0,
             10);
 
     // Create config for trajectory
     TrajectoryConfig config =
-        new TrajectoryConfig(3.65,
-                             2.56)
+        new TrajectoryConfig(2.56,
+                             3.56)
             // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(dDrive)
+            .setKinematics(kDriveKinematics)
             // Apply the voltage constraint
             .addConstraint(autoVoltageConstraint);
 
@@ -51,27 +68,26 @@ public class MakePath extends Command {
         new Pose2d(0, 0, new Rotation2d(0)),
         // Pass through these two interior waypoints, making an 's' curve path
         List.of(
-            new Translation2d(1, 0),
             new Translation2d(1, 1),
-            new Translation2d(0, 1),
-            new Translation2d(0, 0)
+            new Translation2d(2, -1)
         ),
         // End 3 meters straight ahead of where we started, facing forward
         new Pose2d(3, 0, new Rotation2d(0)),
         // Pass config
         config
     );
-     /*RamseteCommand ramseteCommand = new RamseteCommand(
+
+    RamseteCommand ramseteCommand = new RamseteCommand(
         exampleTrajectory,
         m_robotDrive::getPose,
-        new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
-        new SimpleMotorFeedforward(DriveConstants.ksVolts,
-                                   DriveConstants.kvVoltSecondsPerMeter,
-                                   DriveConstants.kaVoltSecondsSquaredPerMeter),
-        DriveConstants.kDriveKinematics,
+        new RamseteController(2, 0.7),
+        new SimpleMotorFeedforward(ksVolts,
+                                   kvVoltSecondsPerMeter,
+                                   kaVoltSecondsSquaredPerMeter),
+        kDriveKinematics,
         m_robotDrive::getWheelSpeeds,
-        new PIDController(DriveConstants.kPDriveVel, 0, 0),
-        new PIDController(DriveConstants.kPDriveVel, 0, 0),
+        new PIDController(kPDriveVel, 0, 0),
+        new PIDController(kPDriveVel, 0, 0),
         // RamseteCommand passes volts to the callback
         m_robotDrive::tankDriveVolts,
         m_robotDrive
@@ -81,9 +97,9 @@ public class MakePath extends Command {
     m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));*/
+    return ramseteCommand.andThen(() -> m_robotDrive.tankDriveVolts(0, 0));
   }
-
+*/
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
